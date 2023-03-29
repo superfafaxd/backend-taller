@@ -23,11 +23,23 @@ router.post('/registroUsuario',
     ],
     registroUsuarios)
 
-router.get('/getUsers', [], GetUsuarios)
+router.post('/getUsers',
+    [
+        check('limite', 'el limite es obligatorio').not().isEmpty(),
+        check('limitePorPagina', 'el limite PorPagina es obligatorio').not().isEmpty(),
+        validarCampos
+    ],
+    GetUsuarios)
 
 router.get('/getUserbyID/:user_id', [], GetUsuariosByID)
 
-router.get('/FiltroUser/:filtro', [], FiltroUsers)
+router.post('/FiltroUser/:filtro',
+    [
+        check('limite', 'el limite es obligatorio').not().isEmpty(),
+        check('limitePorPagina', 'el limite PorPagina es obligatorio').not().isEmpty(),
+        validarCampos
+    ],
+    FiltroUsers)
 
 router.post('/login',
     [

@@ -123,7 +123,7 @@ export const GetAutoByID = async (req, res = response) => {
 
         const sql = `SELECT s.auto_id FROM servicio s WHERE s.auto_id = ${auto_id}`
         const verify = await pool.query(sql)
-
+       
         if (verify[0].length > 0) {
             editAllData = false
             msg = 'No Se Pueden Editar Todos Los Datos de el Auto'

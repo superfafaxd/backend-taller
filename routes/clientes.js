@@ -25,7 +25,8 @@ router.post('/registroCliente',
 router.post('/getClientes',
    [
       check('limite', 'el limite es obligatorio').not().isEmpty(),
-      check('limitePorPagina', 'el limite PorPagina es obligatorio').not().isEmpty()
+      check('limitePorPagina', 'el limite PorPagina es obligatorio').not().isEmpty(),
+      validarCampos
    ],
    GetClientes)
 
@@ -34,7 +35,8 @@ router.get('/getClientesById/:cli_id', GetClienteByID)
 router.post('/FiltroClientes/:filtro',
 [
    check('limite', 'el limite es obligatorio').not().isEmpty(),
-   check('limitePorPagina', 'el limite PorPagina es obligatorio').not().isEmpty()
+   check('limitePorPagina', 'el limite PorPagina es obligatorio').not().isEmpty(),
+   validarCampos
 ],
    FiltroCliente)
 

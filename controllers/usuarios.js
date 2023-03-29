@@ -52,12 +52,17 @@ export const registroUsuarios = async (req, res = response) => {
 
 export const GetUsuarios = async (req, res = response) => {
     try {
-        const sql = 'SELECT user_id, nombre, user, pass FROM usuario WHERE status = 1'
+        const { limite, limitePorPagina } = req.body
+        const sqlCount = 'SELECT COUNT(*) AS amount FROM usuario WHERE status = true'
+        const amount = await pool.query(sqlCount)
+
+        const sql = `SELECT user_id, nombre, user, pass FROM usuario WHERE status = 1 LIMIT ${limite}, ${limitePorPagina}`
         const results = await pool.query(sql)
         console.log('success!')
         return res.status(201).json({
             ok: true,
-            results: results[0]
+            results: results[0],
+            amount: amount[0]
         })
     } catch (error) {
         res.status(500).json({
@@ -94,6 +99,9 @@ export const FiltroUsers = async (req, res = response) => {
     try {
         const filtro = req.params.filtro;
 
+        const sqlCount = `SELECT COUNT(*) AS amount FROM usuario WHERE (nombre LIKE '%${filtro}%' OR user_id LIKE '%${filtro}%') AND status = true`
+        const amount = await pool.query(sqlCount)
+
         const sql = `SELECT user_id, nombre, user, pass, status FROM usuario WHERE (nombre LIKE '%${filtro}%' OR user_id LIKE '%${filtro}%') AND status = true`
         const results = await pool.query(sql)
 
@@ -109,7 +117,8 @@ export const FiltroUsers = async (req, res = response) => {
         return res.status(201).json({
             ok: true,
             code: 3, //todo ok
-            results: results[0]
+            results: results[0],
+            amount: amount[0]
         })
     } catch (error) {
         res.status(500).json({
