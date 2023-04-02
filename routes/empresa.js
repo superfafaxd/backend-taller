@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import { check } from 'express-validator';
-import { Empresa } from'../controllers/empresa.js';
+import { Empresa, GetEmpresa } from '../controllers/empresa.js';
 import { validarCampos } from '../middlewares/validar-campos.js';
 
 const router = Router();
 //representante	taller_nom	pais	estado	municipio	domicilio	cp
-router.post('/empresa',
+router.put('/UpdateEmpresa',
     [
         check('representante', 'El representante es obligatorio').not().isEmpty(),
         check('taller_nom', 'El nombre de el taller es obligatorio').not().isEmpty(),
@@ -18,4 +18,6 @@ router.post('/empresa',
     ],
     Empresa)
 
-    export default router;
+router.get('/getEmpresa', [], GetEmpresa)
+
+export default router;

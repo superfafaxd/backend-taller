@@ -19,7 +19,7 @@ export const registroCliente = async (req, res = response) => {
 
 
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             error,
             msg: 'Error al registrar'
         })
@@ -43,7 +43,7 @@ export const GetClientes = async (req, res = response) => {
         })
 
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             error,
             msg: 'Error al obtener los datos!'
         })
@@ -82,7 +82,7 @@ export const FiltroCliente = async (req, res = response) => {
         })
 
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             error,
             msg: 'Error al obtener los datos!'
         })
@@ -102,7 +102,7 @@ export const GetClienteByID = async (req, res = response) => {
         })
 
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             error,
             msg: 'Error al obtener los datos!'
         })
@@ -124,7 +124,7 @@ export const UpdateCliente = async (req, res = response) => {
         })
 
     } catch (error) {
-        res.status(500).json({
+        return  res.status(500).json({
             error,
             msg: 'Error al actualizar'
         })
@@ -145,7 +145,7 @@ export const UpdateStatusCliente = async (req, res = response) => {
         })
 
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             error,
             msg: 'Error al registrar'
         })
@@ -165,7 +165,7 @@ export const DeleteCliente = async (req, res = response) => {
         })
 
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             error,
             msg: 'Error al registrar'
         })
