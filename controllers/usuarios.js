@@ -98,11 +98,12 @@ export const GetUsuariosByID = async (req, res = response) => {
 export const FiltroUsers = async (req, res = response) => {
     try {
         const filtro = req.params.filtro;
-
+        const { limite, limitePorPagina } = req.body
         const sqlCount = `SELECT COUNT(*) AS amount FROM usuario WHERE (nombre LIKE '%${filtro}%' OR user_id LIKE '%${filtro}%') AND status = true`
         const amount = await pool.query(sqlCount)
 
-        const sql = `SELECT user_id, nombre, user, pass, status FROM usuario WHERE (nombre LIKE '%${filtro}%' OR user_id LIKE '%${filtro}%') AND status = true`
+        const sql = `SELECT user_id, nombre, user, pass, status FROM usuario WHERE (nombre LIKE '%${filtro}%' OR user_id LIKE '%${filtro}%') AND status = true
+        LIMIT ${limite}, ${limitePorPagina}`
         const results = await pool.query(sql)
 
         if (results[0].length === 0) {

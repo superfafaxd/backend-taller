@@ -26,7 +26,6 @@ router.put('/updateServicio/:serv_id',
     [
         check('motivo', 'El motivo del servicio es obligatorio').not().isEmpty(),
         check('total', 'El Total del servicio es obligatorio').not().isEmpty(),
-        check('fecha_ingreso', 'Fecha de ingreso es obligatorio o esta en formato incorrecto (aa-mm-dd)').isDate(),
         check('fecha_entrega', 'Fecha de entrega es obligatorio o esta en formato incorrecto (aa-mm-dd)').isDate(),
         check('status', 'El status es obligatorio').not().isEmpty(),
 
@@ -35,7 +34,7 @@ router.put('/updateServicio/:serv_id',
 
 router.post('/deleteServicio/:serv_id', [], CancelService)
 
-router.get('/getServicio/:serv_id', [], GetServicioByID)
+router.get('/getServicioById/:serv_id', [], GetServicioByID)
 
 router.post('/getServices', [], GetServices)
 
